@@ -1,0 +1,105 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ConsoleLights
+LIBS:Console_Lights-cache
+EELAYER 25 0
+EELAYER END
+$Descr A 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "Console Lights Schematic"
+Date "2018-10-30"
+Rev "0.1"
+Comp "NOCTIVORE"
+Comment1 "IF IN DOUBT - ASK"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Metro_Mini U101
+U 1 1 5BD8A676
+P 6375 3000
+F 0 "U101" H 5875 3800 60  0000 C CNN
+F 1 "Metro_Mini" H 6375 2250 60  0000 C CNN
+F 2 "" H 6375 3000 60  0001 C CNN
+F 3 "" H 6375 3000 60  0001 C CNN
+	1    6375 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74HC595_SHIFT_REGISTER U?
+U 1 1 5BD8CBF8
+P 4450 2550
+F 0 "U?" H 4100 3050 50  0000 C CNN
+F 1 "74HC595_SHIFT_REGISTER" H 4450 2100 50  0000 C CNN
+F 2 "" H 4450 2450 50  0001 C CNN
+F 3 "" H 4450 2450 50  0001 C CNN
+	1    4450 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74HC595_SHIFT_REGISTER U?
+U 1 1 5BD8CDF2
+P 4450 3650
+F 0 "U?" H 4100 4150 50  0000 C CNN
+F 1 "74HC595_SHIFT_REGISTER" H 4450 3200 50  0000 C CNN
+F 2 "" H 4450 3550 50  0001 C CNN
+F 3 "" H 4450 3550 50  0001 C CNN
+	1    4450 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L ULN2003A_DARLINGTON_ARRAY U?
+U 1 1 5BD8DDEC
+P 3000 2575
+F 0 "U?" H 3400 3075 50  0000 C CNN
+F 1 "ULN2003A_DARLINGTON_ARRAY" H 3000 2125 50  0000 C CNN
+F 2 "" H 3050 1925 50  0001 L CNN
+F 3 "" H 3145 2525 50  0001 C CNN
+	1    3000 2575
+	-1   0    0    -1  
+$EndComp
+$Comp
+L ULN2003A_DARLINGTON_ARRAY U?
+U 1 1 5BD8DE41
+P 3000 3700
+F 0 "U?" H 3400 4200 50  0000 C CNN
+F 1 "ULN2003A_DARLINGTON_ARRAY" H 3000 3250 50  0000 C CNN
+F 2 "" H 3050 3050 50  0001 L CNN
+F 3 "" H 3145 3650 50  0001 C CNN
+	1    3000 3700
+	-1   0    0    -1  
+$EndComp
+$EndSCHEMATC

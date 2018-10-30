@@ -1,0 +1,10 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+#KiCad temp files
+*.bak
+*.bck
+*.kicad_pcb-bak
+*-cache.lib
+_autosave*
