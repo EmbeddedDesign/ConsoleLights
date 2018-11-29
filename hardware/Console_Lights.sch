@@ -39,7 +39,7 @@ $Descr A 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Console Lights Schematic"
-Date "2018-11-08"
+Date "2018-11-29"
 Rev "0.1"
 Comp "NOCTIVORE"
 Comment1 "IF IN DOUBT - ASK"
@@ -59,10 +59,10 @@ F 3 "" H 7825 2500 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L ULN2003A_DARLINGTON_ARRAY U104
+L ULN2003A_DARLINGTON_ARRAY U105
 U 1 1 5BD8DDEC
 P 2600 1950
-F 0 "U104" H 2950 2450 50  0000 C CNN
+F 0 "U105" H 2950 2450 50  0000 C CNN
 F 1 "ULN2003A_DARLINGTON_ARRAY" H 2600 1500 50  0000 C CNN
 F 2 "ConsoleLights:16-TSSOP" H 2650 1300 50  0001 L CNN
 F 3 "" H 2745 1900 50  0001 C CNN
@@ -70,10 +70,10 @@ F 3 "" H 2745 1900 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L ULN2003A_DARLINGTON_ARRAY U105
+L ULN2003A_DARLINGTON_ARRAY U104
 U 1 1 5BD8DE41
 P 2600 3250
-F 0 "U105" H 2950 3750 50  0000 C CNN
+F 0 "U104" H 2950 3750 50  0000 C CNN
 F 1 "ULN2003A_DARLINGTON_ARRAY" H 2600 2800 50  0000 C CNN
 F 2 "ConsoleLights:16-TSSOP" H 2650 2600 50  0001 L CNN
 F 3 "" H 2745 3200 50  0001 C CNN
@@ -160,10 +160,10 @@ $EndComp
 NoConn ~ 4600 1800
 NoConn ~ 4600 3100
 $Comp
-L 74HC595_SHIFT_REGISTER U102
+L 74HC595_SHIFT_REGISTER U103
 U 1 1 5BD8FC00
 P 4150 1950
-F 0 "U102" H 3850 2450 50  0000 C CNN
+F 0 "U103" H 3850 2450 50  0000 C CNN
 F 1 "74HC595_SHIFT_REGISTER" H 4150 1500 50  0000 C CNN
 F 2 "ConsoleLights:16-TSSOP" H 4150 1850 50  0001 C CNN
 F 3 "" H 4150 1850 50  0001 C CNN
@@ -171,10 +171,10 @@ F 3 "" H 4150 1850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC595_SHIFT_REGISTER U103
+L 74HC595_SHIFT_REGISTER U102
 U 1 1 5BD8FC43
 P 4150 3250
-F 0 "U103" H 3850 3750 50  0000 C CNN
+F 0 "U102" H 3850 3750 50  0000 C CNN
 F 1 "74HC595_SHIFT_REGISTER" H 4150 2800 50  0000 C CNN
 F 2 "ConsoleLights:16-TSSOP" H 4150 3150 50  0001 C CNN
 F 3 "" H 4150 3150 50  0001 C CNN
@@ -368,23 +368,23 @@ F 3 "" H 1175 5100 50  0001 C CNN
 	1    1175 5100
 	-1   0    0    -1  
 $EndComp
-Text Label 8625 2950 0    60   ~ 0
-SWITCH_0
-Text Label 8625 2850 0    60   ~ 0
-SWITCH_1
-Text Label 8625 2750 0    60   ~ 0
-SWITCH_2
-Text Label 8625 2650 0    60   ~ 0
-SWITCH_3
-Text Label 8625 2550 0    60   ~ 0
-SWITCH_4
-Text Label 8625 2450 0    60   ~ 0
-SWITCH_5
-Text Label 8625 2350 0    60   ~ 0
-SWITCH_6
-Text Label 8625 2250 0    60   ~ 0
-SWITCH_7
 Text Label 8625 2150 0    60   ~ 0
+SWITCH_0
+Text Label 8625 2350 0    60   ~ 0
+SWITCH_1
+Text Label 8625 2550 0    60   ~ 0
+SWITCH_2
+Text Label 8625 2750 0    60   ~ 0
+SWITCH_3
+Text Label 8625 2950 0    60   ~ 0
+SWITCH_4
+Text Label 8625 2850 0    60   ~ 0
+SWITCH_5
+Text Label 8625 2650 0    60   ~ 0
+SWITCH_6
+Text Label 8625 2450 0    60   ~ 0
+SWITCH_7
+Text Label 8625 2250 0    60   ~ 0
 SWITCH_8
 Text Label 8625 1950 0    60   ~ 0
 SWITCH_9
@@ -414,28 +414,26 @@ F 3 "" H 1525 4925 50  0001 C CNN
 	1    1525 4925
 	1    0    0    -1  
 $EndComp
-Text Label 1950 1600 2    60   ~ 0
+Text Label 1950 3300 2    60   ~ 0
 LED_0
-Text Label 1950 1700 2    60   ~ 0
+Text Label 1950 3200 2    60   ~ 0
 LED_1
-Text Label 1950 1800 2    60   ~ 0
-LED_2
-Text Label 1950 1900 2    60   ~ 0
-LED_3
-Text Label 1950 2000 2    60   ~ 0
-LED_4
-Text Label 1950 2100 2    60   ~ 0
-LED_5
-Text Label 1950 2200 2    60   ~ 0
-LED_6
 Text Label 1950 3100 2    60   ~ 0
-LED_9
-Text Label 1950 2900 2    60   ~ 0
-LED_7
+LED_2
 Text Label 1950 3000 2    60   ~ 0
+LED_3
+Text Label 1950 2900 2    60   ~ 0
+LED_4
+Text Label 1950 2000 2    60   ~ 0
+LED_5
+Text Label 1950 1900 2    60   ~ 0
+LED_6
+Text Label 1950 1600 2    60   ~ 0
+LED_9
+Text Label 1950 1800 2    60   ~ 0
+LED_7
+Text Label 1950 1700 2    60   ~ 0
 LED_8
-NoConn ~ 2100 3200
-NoConn ~ 2100 3300
 NoConn ~ 2100 3400
 NoConn ~ 2100 3500
 Text Label 1525 5200 0    60   ~ 0
@@ -547,10 +545,6 @@ Wire Wire Line
 	1950 1900 2100 1900
 Wire Wire Line
 	1950 2000 2100 2000
-Wire Wire Line
-	1950 2100 2100 2100
-Wire Wire Line
-	1950 2200 2100 2200
 Wire Wire Line
 	1950 2900 2100 2900
 Wire Wire Line
@@ -840,7 +834,7 @@ F 3 "" H 1200 6025 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 1550 6025 0    60   ~ 0
-SWITCH_0
+SWITCH_5
 $Comp
 L GND #PWR027
 U 1 1 5BE4BF16
@@ -864,7 +858,7 @@ F 3 "" H 1550 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 1550 6125 0    60   ~ 0
-LED_0
+LED_5
 Wire Wire Line
 	1400 5925 1550 5925
 Wire Wire Line
@@ -889,7 +883,7 @@ F 3 "" H 2200 6025 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 2550 6025 0    60   ~ 0
-SWITCH_0
+SWITCH_6
 $Comp
 L GND #PWR029
 U 1 1 5BE4BF30
@@ -913,7 +907,7 @@ F 3 "" H 2550 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 2550 6125 0    60   ~ 0
-LED_0
+LED_6
 Wire Wire Line
 	2400 5925 2550 5925
 Wire Wire Line
@@ -938,7 +932,7 @@ F 3 "" H 3175 6025 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 3525 6025 0    60   ~ 0
-SWITCH_0
+SWITCH_7
 $Comp
 L GND #PWR031
 U 1 1 5BE4BF4A
@@ -962,7 +956,7 @@ F 3 "" H 3525 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 3525 6125 0    60   ~ 0
-LED_0
+LED_7
 Wire Wire Line
 	3375 5925 3525 5925
 Wire Wire Line
@@ -987,7 +981,7 @@ F 3 "" H 4175 6025 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 4525 6025 0    60   ~ 0
-SWITCH_0
+SWITCH_8
 $Comp
 L GND #PWR033
 U 1 1 5BE4BF64
@@ -1011,7 +1005,7 @@ F 3 "" H 4525 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 4525 6125 0    60   ~ 0
-LED_0
+LED_8
 Wire Wire Line
 	4375 5925 4525 5925
 Wire Wire Line
@@ -1036,7 +1030,7 @@ F 3 "" H 5150 6025 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Text Label 5500 6025 0    60   ~ 0
-SWITCH_0
+SWITCH_9
 $Comp
 L GND #PWR035
 U 1 1 5BE4BF7E
@@ -1060,7 +1054,7 @@ F 3 "" H 5500 5850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 5500 6125 0    60   ~ 0
-LED_0
+LED_9
 Wire Wire Line
 	5350 5925 5500 5925
 Wire Wire Line
@@ -1145,4 +1139,18 @@ NoConn ~ 7175 2050
 NoConn ~ 7175 2150
 NoConn ~ 7175 2250
 NoConn ~ 7175 2350
+NoConn ~ 2100 2100
+NoConn ~ 2100 2200
+Wire Wire Line
+	1950 3200 2100 3200
+Wire Wire Line
+	1950 3300 2100 3300
+Text Label 8625 2050 0    60   ~ 0
+DATA
+Text Label 8625 1850 0    60   ~ 0
+CLOCK
+Wire Wire Line
+	8625 2050 8475 2050
+Wire Wire Line
+	8625 1850 8475 1850
 $EndSCHEMATC
