@@ -1153,4 +1153,8 @@ Wire Wire Line
 	8625 2050 8475 2050
 Wire Wire Line
 	8625 1850 8475 1850
+Text Label 7000 2550 2    60   ~ 0
+LATCH
+NoConn ~ 8475 3050
+NoConn ~ 8475 3150
 $EndSCHEMATC
