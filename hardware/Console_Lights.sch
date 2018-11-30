@@ -39,7 +39,7 @@ $Descr A 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Console Lights Schematic"
-Date "2018-11-29"
+Date "2018-11-30"
 Rev "0.1"
 Comp "NOCTIVORE"
 Comment1 "IF IN DOUBT - ASK"
@@ -205,14 +205,14 @@ F 3 "" H 4750 3675 50  0001 C CNN
 $EndComp
 Text Label 4750 1900 0    60   ~ 0
 DATA
-Text Label 4750 2000 0    60   ~ 0
-CLOCK
 Text Label 4750 2100 0    60   ~ 0
+CLOCK
+Text Label 4750 2000 0    60   ~ 0
 LATCH
 NoConn ~ 4600 3500
-Text Label 4750 3300 0    60   ~ 0
-CLOCK
 Text Label 4750 3400 0    60   ~ 0
+CLOCK
+Text Label 4750 3300 0    60   ~ 0
 LATCH
 $Comp
 L C_Small C801
@@ -368,9 +368,9 @@ F 3 "" H 1175 5100 50  0001 C CNN
 	1    1175 5100
 	-1   0    0    -1  
 $EndComp
-Text Label 8625 2150 0    60   ~ 0
+Text Label 7025 2550 2    60   ~ 0
 SWITCH_0
-Text Label 8625 2350 0    60   ~ 0
+Text Label 7025 2450 2    60   ~ 0
 SWITCH_1
 Text Label 8625 2550 0    60   ~ 0
 SWITCH_2
@@ -386,7 +386,7 @@ Text Label 8625 2450 0    60   ~ 0
 SWITCH_7
 Text Label 8625 2250 0    60   ~ 0
 SWITCH_8
-Text Label 8625 1950 0    60   ~ 0
+Text Label 7025 2650 2    60   ~ 0
 SWITCH_9
 Text Label 1525 5100 0    60   ~ 0
 SWITCH_0
@@ -591,13 +591,13 @@ Wire Wire Line
 Wire Wire Line
 	8625 2450 8475 2450
 Wire Wire Line
-	8625 2350 8475 2350
+	7025 2450 7175 2450
 Wire Wire Line
-	8625 2150 8475 2150
+	7025 2550 7175 2550
 Wire Wire Line
 	8625 2250 8475 2250
 Wire Wire Line
-	8625 1950 8475 1950
+	7025 2650 7175 2650
 Wire Wire Line
 	1375 5000 1525 5000
 Wire Wire Line
@@ -1153,8 +1153,28 @@ Wire Wire Line
 	8625 2050 8475 2050
 Wire Wire Line
 	8625 1850 8475 1850
-Text Label 7000 2550 2    60   ~ 0
+Text Label 8625 1950 0    60   ~ 0
 LATCH
 NoConn ~ 8475 3050
 NoConn ~ 8475 3150
+Wire Wire Line
+	8625 1950 8475 1950
+NoConn ~ 7175 2750
+NoConn ~ 7175 2850
+NoConn ~ 8475 2350
+$Comp
+L +5V #PWR?
+U 1 1 5C01AF28
+P 9075 2075
+F 0 "#PWR?" H 9075 1925 50  0001 C CNN
+F 1 "+5V" H 9075 2215 50  0000 C CNN
+F 2 "" H 9075 2075 50  0001 C CNN
+F 3 "" H 9075 2075 50  0001 C CNN
+	1    9075 2075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8475 2150 9075 2150
+Wire Wire Line
+	9075 2150 9075 2075
 $EndSCHEMATC
