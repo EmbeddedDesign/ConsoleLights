@@ -1,14 +1,14 @@
 (export (version D)
   (design
     (source /home/ops/Documents/ConsoleLights/hardware/Console_Lights.sch)
-    (date "Fri 07 Dec 2018 03:42:00 PM PST")
+    (date "Wed 12 Dec 2018 04:44:01 PM PST")
     (tool "Eeschema 4.0.7-e2-6376~58~ubuntu16.04.1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
         (title "Console Lights Schematic")
         (company NOCTIVORE)
         (rev 0.1)
-        (date 2018-12-07)
+        (date 2018-12-12)
         (source Console_Lights.sch)
         (comment (number 1) (value "IF IN DOUBT - ASK"))
         (comment (number 2) (value ""))
@@ -83,7 +83,7 @@
       (tstamp 5BD9136E))
     (comp (ref SW501)
       (value SWITCH)
-      (footprint ConsoleLights:Panasonic_Tac_Switch_EVQ-Q2K03W)
+      (footprint ConsoleLights:CK_PTS645_Tac_Switch)
       (libsource (lib ConsoleLights) (part SWITCH))
       (sheetpath (names /) (tstamps /))
       (tstamp 5BDCB593))
@@ -293,10 +293,10 @@
         (pin (num 15) (name O2) (type openCol))
         (pin (num 16) (name O1) (type openCol)))))
   (libraries
-    (library (logical device)
-      (uri /usr/share/kicad/library/device.lib))
     (library (logical conn)
       (uri /usr/share/kicad/library/conn.lib))
+    (library (logical device)
+      (uri /usr/share/kicad/library/device.lib))
     (library (logical ConsoleLights)
       (uri /home/ops/Documents/ConsoleLights/hardware/lib/ConsoleLights.lib)))
   (nets

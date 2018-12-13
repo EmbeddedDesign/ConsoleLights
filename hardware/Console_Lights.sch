@@ -39,7 +39,7 @@ $Descr A 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Console Lights Schematic"
-Date "2018-12-07"
+Date "2018-12-12"
 Rev "0.1"
 Comp "NOCTIVORE"
 Comment1 "IF IN DOUBT - ASK"
@@ -352,7 +352,7 @@ U 1 1 5BDCB593
 P 7400 4975
 F 0 "SW501" H 7400 5225 60  0000 C CNN
 F 1 "SWITCH" H 7400 4875 60  0000 C CNN
-F 2 "ConsoleLights:Panasonic_Tac_Switch_EVQ-Q2K03W" H 7400 4975 60  0001 C CNN
+F 2 "ConsoleLights:CK_PTS645_Tac_Switch" H 7400 4975 60  0001 C CNN
 F 3 "" H 7400 4975 60  0001 C CNN
 	1    7400 4975
 	1    0    0    -1  
