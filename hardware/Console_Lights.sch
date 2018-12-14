@@ -39,7 +39,7 @@ $Descr A 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Console Lights Schematic"
-Date "2018-12-12"
+Date "2018-12-14"
 Rev "0.1"
 Comp "NOCTIVORE"
 Comment1 "IF IN DOUBT - ASK"
