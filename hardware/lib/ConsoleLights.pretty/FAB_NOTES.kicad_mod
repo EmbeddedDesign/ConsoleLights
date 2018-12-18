@@ -1,4 +1,4 @@
-(module FAB_NOTES (layer F.Cu) (tedit 5BFF2127)
+(module FAB_NOTES (layer F.Cu) (tedit 5C16BC49)
   (fp_text reference REF** (at 0 0.5) (layer F.SilkS) hide
     (effects (font (size 1 1) (thickness 0.15)))
   )
@@ -28,7 +28,7 @@
   (fp_text user "5) Minimum trace width 6 mil, minimum spacing 6 mil" (at 32.47 15.25) (layer F.Fab)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
-  (fp_text user "6) Apply LPI soldermasker (black) on front and back side" (at 34.185 18) (layer F.Fab)
+  (fp_text user "6) Apply LPI soldermasker (blue) on front and back side" (at 33.585 18) (layer F.Fab)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (fp_text user "7) Silkscreen on top and bottom side using (white) epoxy ink" (at 36.545 20.75) (layer F.Fab)
