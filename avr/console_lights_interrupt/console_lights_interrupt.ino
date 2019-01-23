@@ -7,6 +7,7 @@
 // Include headers
 #include <avr/power.h>
 #include "util/delay.h"
+#include "PinChangeInterrupt.h"
 
 // Switch & LED structure
 struct switch_struct {
@@ -30,7 +31,7 @@ switch_struct switches[10] = {
 };
 
 // Global state for any switch change event
-boolean switchStateChanged = false;
+//boolean switchStateChanged = false;
 
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0])) // Size function for arbitrary array types
 uint8_t patternNumber = 0; // Default pattern number
@@ -41,8 +42,16 @@ void setup(){
   DDRB |= 0x38; // DATA_PIN (11), LATCH_PIN (12), CLOCK_PIN (13) to OUTPUT
   // Configure switch and mode pins
   PORTB |= 0x02; // SWITCH 8 to INPUT_PULLUP
-  PORTC |= 0x27; // SWITCHS 0, 1, 9, and MODE to INPUT_PULLUP
+  PORTC |= 0x27; // SWITCHS 0, 1, 9, and MODE (19) to INPUT_PULLUP
   PORTD |= 0xFC; // SWITCHS 2, 3, 4, 5, 6, 7 to INPUT_PULLUP
+
+  // Attach FALLING interrupt to MODE (19) pin
+  attachPCINT(digitalPinToPCINT(19), getMode, FALLING);
+
+  // Attach CHANGE interrupts to switch pins
+  for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
+    attachPCINT(digitalPinToPCINT(switches[i].switchPin), pinChangedINT, CHANGE);
+  }
 
   srandom(analogRead(17)); // Seed random from floating pin
 
@@ -55,45 +64,26 @@ PatternList patterns = {scramble, onOff, off};
 
 // Run forever
 void loop() {
-  getMode();
+  // Empty loop, everything is interrupt based
+}
+
+// Set the mode based on MODE (19) switch presses
+// Increments to the next pattern on each press, wrap around to the first pattern at the end
+void getMode() {
+  patternNumber = (patternNumber + 1) % ARRAY_SIZE(patterns);
+  patterns[patternNumber]();
+}
+
+void pinChangedINT() {
   getSwitchStates();
   patterns[patternNumber]();
 }
 
-// Set the mode based upon MODE switch presses
-// Increments to the next pattern on each press, wrap around to the first pattern at the end
-// Includes switch debounce
-void getMode() {
-  #define debounceDelay 100
-  static unsigned long debounceTime = 0;
-  static uint8_t previousState = HIGH;
-  static uint8_t currentState;
-  
-  uint8_t reading = PINC & _BV(PC5); // Read MODE (19) pin;
-  
-  if(reading != previousState) {
-    debounceTime = millis();
-  }
-  
-  if((millis() - debounceTime > debounceDelay) && (reading != currentState)) {
-    currentState = reading;
-    if(currentState == LOW){
-      patternNumber = (patternNumber + 1) % ARRAY_SIZE(patterns);
-    }
-  }
-  
-  previousState = reading;
-}
-
-// Read the current state of all the switches
+// Called whenever a switch changes state
 void getSwitchStates() {
-  switchStateChanged = false; // Reset global switch state changed variable
+//  switchStateChanged = true; // Trigger switch state changed variable
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
-    boolean state = digitalRead(switches[i].switchPin);
-    if(state != switches[i].isOn) {
-      switchStateChanged = true;
-    }
-    switches[i].isOn = state;
+    switches[i].isOn = digitalRead(switches[i].switchPin);
   }
 }
 
@@ -106,17 +96,17 @@ void onOff() {
 void scramble() {
   uint16_t randomBits;
   // Determine if any button switch have changed
-  if(switchStateChanged) {
+//  if(switchStateChanged) {
     // Blink random lights BLINK_N_TIMES
     for(uint8_t i=0; i<BLINK_N_TIMES; i++){
       randomBits = random(65536L) & 7967; // 0001111100011111 binary mask
       updateShiftRegister(randomBits);
       _delay_ms(BLINK_DELAY);
     }
-  }
+//  }
 
   // Show actual switch states
-  getSwitchStates();
+  getSwitchStates(); // Check states again in case anything changed during routine
   updateShiftRegister(updateBits());
 }
 
