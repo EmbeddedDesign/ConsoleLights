@@ -5,7 +5,6 @@
 /*PROBABLY DON'T MODIFY ANYTHING BELOW THIS LINE*/
 
 // Include headers
-#include <avr/power.h>
 #include "util/delay.h"
 #include "PinChangeInterrupt.h"
 
@@ -30,11 +29,18 @@ switch_struct switches[10] = {
   {16, false,  0}  // SWITCH 9 PC2
 };
 
-// Global state for any switch change event
-//boolean switchStateChanged = false;
-
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0])) // Size function for arbitrary array types
 uint8_t patternNumber = 0; // Default pattern number
+
+// Pattern function prototypes
+// Declared here so we can call them in setup before properly defining them later on
+void scramble(void);
+void onOff(void);
+void off(void);
+
+// List of available pattern functions
+typedef void (*PatternList[])();
+PatternList patterns = {scramble, onOff, off};
 
 // Configure hardware
 void setup(){
@@ -56,11 +62,10 @@ void setup(){
   srandom(analogRead(17)); // Seed random from floating pin
 
   _delay_ms(200); // Wait a moment for hardware to finish initializing
-}
 
-// List of available pattern functions
-typedef void (*PatternList[])();
-PatternList patterns = {scramble, onOff, off};
+  getSwitchStates(); // Get initial switch states
+  patterns[patternNumber](); // Run the default pattern
+}
 
 // Run forever
 void loop() {
@@ -75,13 +80,22 @@ void getMode() {
 }
 
 void pinChangedINT() {
-  getSwitchStates();
+  // Disable interrupts to switch pins
+  for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
+    disablePinChangeInterrupt(digitalPinToPCINT(switches[i].switchPin));
+  }
+
+  // Run the current pattern
   patterns[patternNumber]();
+  
+  // Enable interrupts to switch pins
+  for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
+    enablePinChangeInterrupt(digitalPinToPCINT(switches[i].switchPin));
+  }
 }
 
 // Called whenever a switch changes state
 void getSwitchStates() {
-//  switchStateChanged = true; // Trigger switch state changed variable
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
     switches[i].isOn = digitalRead(switches[i].switchPin);
   }
@@ -89,21 +103,19 @@ void getSwitchStates() {
 
 // LED is on if switch is depressed, off otherwise
 void onOff() {
+  getSwitchStates();
   updateShiftRegister(updateBits());
 }
 
 // Toggling any switch blinks random LEDs 'BLINK_N_TIMES' times then returns to onOff states
 void scramble() {
   uint16_t randomBits;
-  // Determine if any button switch have changed
-//  if(switchStateChanged) {
-    // Blink random lights BLINK_N_TIMES
-    for(uint8_t i=0; i<BLINK_N_TIMES; i++){
-      randomBits = random(65536L) & 7967; // 0001111100011111 binary mask
-      updateShiftRegister(randomBits);
-      _delay_ms(BLINK_DELAY);
-    }
-//  }
+  // Blink random lights BLINK_N_TIMES
+  for(uint8_t i=0; i<BLINK_N_TIMES; i++){
+    randomBits = random(65536L) & 7967; // 0001111100011111 binary mask for shift register bits
+    updateShiftRegister(randomBits);
+    _delay_ms(BLINK_DELAY);
+  }
 
   // Show actual switch states
   getSwitchStates(); // Check states again in case anything changed during routine
