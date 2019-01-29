@@ -10,23 +10,25 @@
 
 // Switch & LED structure
 struct switch_struct {
-  uint8_t switchPin;
   boolean isOn;
+  uint8_t switchPin;
   uint8_t bitPosition;
+  uint8_t PCINT;
 };
 
 // Array of switch_struct elements
+// Format: {isOn, switchPin, bitPosition, PCINT}
 switch_struct switches[10] = {
-  {15, false, 12}, // SWITCH 0 PC1
-  {14, false, 11}, // SWITCH 1 PC0
-  {6,  false, 10}, // SWITCH 2 PD6
-  {4,  false,  9}, // SWITCH 3 PD4
-  {2,  false,  8}, // SWITCH 4 PD2
-  {3,  false,  4}, // SWITCH 5 PD3
-  {5,  false,  3}, // SWITCH 6 PD5
-  {7,  false,  2}, // SWITCH 7 PD7
-  {9,  false,  1}, // SWITCH 8 PB1
-  {16, false,  0}  // SWITCH 9 PC2
+  {false, 15, 12,  9}, // SWITCH 0 PC1
+  {false, 14, 11,  8}, // SWITCH 1 PC0
+  {false, 6,  10, 22}, // SWITCH 2 PD6
+  {false, 4,  9,  20}, // SWITCH 3 PD4
+  {false, 2,  8,  18}, // SWITCH 4 PD2
+  {false, 3,  4,  19}, // SWITCH 5 PD3
+  {false, 5,  3,  21}, // SWITCH 6 PD5
+  {false, 7,  2,  23}, // SWITCH 7 PD7
+  {false, 9,  1,   1}, // SWITCH 8 PB1
+  {false, 16, 0,  10}  // SWITCH 9 PC2
 };
 
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0])) // Size function for arbitrary array types
@@ -51,12 +53,12 @@ void setup(){
   PORTC |= 0x27; // SWITCHS 0, 1, 9, and MODE (19) to INPUT_PULLUP
   PORTD |= 0xFC; // SWITCHS 2, 3, 4, 5, 6, 7 to INPUT_PULLUP
 
-  // Attach FALLING interrupt to MODE (19) pin
-  attachPCINT(digitalPinToPCINT(19), getMode, FALLING);
+  // Attach FALLING interrupt to MODE (19/PCINT13) pin
+  attachPCINT(13, getMode, FALLING);
 
   // Attach CHANGE interrupts to switch pins
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
-    attachPCINT(digitalPinToPCINT(switches[i].switchPin), pinChangedINT, CHANGE);
+    attachPCINT(switches[i].PCINT, pinChangedINT, CHANGE);
   }
 
   srandom(analogRead(17)); // Seed random from floating pin
@@ -82,7 +84,7 @@ void getMode() {
 void pinChangedINT() {
   // Disable interrupts to switch pins
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
-    disablePinChangeInterrupt(digitalPinToPCINT(switches[i].switchPin));
+    disablePCINT(switches[i].PCINT);
   }
 
   // Run the current pattern
@@ -90,19 +92,22 @@ void pinChangedINT() {
   
   // Enable interrupts to switch pins
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
-    enablePinChangeInterrupt(digitalPinToPCINT(switches[i].switchPin));
+    enablePCINT(switches[i].PCINT);
   }
 }
 
 // Called whenever a switch changes state
 void getSwitchStates() {
   for(uint8_t i=0; i<ARRAY_SIZE(switches); i++) {
-    switches[i].isOn = digitalRead(switches[i].switchPin);
+    uint8_t pin = switches[i].switchPin;
+    // Faster, lighter digitalRead()
+    switches[i].isOn = *portInputRegister(digitalPinToPort(pin)) & digitalPinToBitMask(pin);
   }
 }
 
 // LED is on if switch is depressed, off otherwise
 void onOff() {
+  _delay_ms(50); // Debounce delay
   getSwitchStates();
   updateShiftRegister(updateBits());
 }
